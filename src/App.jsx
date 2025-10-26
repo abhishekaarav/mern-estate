@@ -1,11 +1,11 @@
-import React from 'react'
-import Home from './Pages/Home';
-import About from './Pages/About';
-import SignIn from './Pages/SignIn';
-import SignUp from './Pages/SignUp';
-import Profile from './Pages/Profile';
-import NotFound from './Pages/NotFound';
-import { Route, Routes } from 'react-router-dom';
+import React from "react";
+import Home from "./Pages/Home";
+import About from "./Pages/About";
+import SignIn from "./Pages/SignIn";
+import SignUp from "./Pages/SignUp";
+import Profile from "./Pages/Profile";
+import NotFound from "./Pages/NotFound";
+import { Route, Routes } from "react-router-dom";
 
 export default function App() {
   return (
