@@ -2,6 +2,7 @@ import { FaSearch } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
+import logo from "../assets/logo.png";
 
 export default function Header() {
   const { currentUser } = useSelector((state) => state.user);
@@ -24,13 +25,15 @@ export default function Header() {
   }, [location.search]);
   return (
     <header className="bg-slate-200 shadow-md">
-      <div className="flex justify-between items-center max-w-6xl mx-auto p-3">
-        <Link to="/">
-          <h1 className="font-bold text-sm sm:text-xl flex flex-wrap">
-            <span className="text-slate-500">Sahand</span>
-            <span className="text-slate-700">Estate</span>
-          </h1>
+      <div className="flex justify-between items-center max-w-6xl mx-auto p-3 ">
+        <Link to="/" className="flex items-center">
+          <img
+            src={logo}
+            alt="PrimeSpace Logo"
+            className="h-8 sm:h-10 w-auto object-contain"
+          />
         </Link>
+
         <form
           onSubmit={handleSubmit}
           className="bg-slate-100 p-3 rounded-lg flex items-center"
