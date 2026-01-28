@@ -3,10 +3,12 @@ import { app } from "../firebase";
 import { useDispatch } from "react-redux";
 import { signInSuccess } from "../redux/user/userSlice";
 import { useNavigate } from "react-router-dom";
+import { FaGoogle } from "react-icons/fa";
 
 export default function OAuth() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const handleGoogleClick = async () => {
     try {
       const provider = new GoogleAuthProvider();
@@ -25,20 +27,28 @@ export default function OAuth() {
           photo: result.user.photoURL,
         }),
       });
+
       const data = await res.json();
       dispatch(signInSuccess(data));
       navigate("/");
     } catch (error) {
-      console.log("could not sign in with google", error);
+      console.log("Could not sign in with Google", error);
     }
   };
+
   return (
     <button
       onClick={handleGoogleClick}
       type="button"
-      className="bg-red-700 text-white p-3 rounded-lg uppercase hover:opacity-95"
+      className="w-full flex items-center justify-center gap-3
+                 bg-[#d90429] text-white py-3 rounded-xl
+                 font-semibold text-lg
+                 transition-all duration-300
+                 hover:bg-[#b40321] hover:scale-[1.02]
+                 active:scale-[0.97]"
     >
-      Continue with google
+      <FaGoogle className="text-xl" />
+      Continue with Google
     </button>
   );
 }
