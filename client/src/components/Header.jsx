@@ -18,7 +18,6 @@ export default function Header() {
     navigate(`/search?${urlParams.toString()}`);
   };
 
-  // Update search term when URL changes (syncs with Search page)
   useEffect(() => {
     const urlParams = new URLSearchParams(location.search);
     const searchTermFromUrl = urlParams.get("searchTerm");
@@ -27,13 +26,12 @@ export default function Header() {
     } else {
       setSearchTerm("");
     }
-  }, [location.search]); // Added dependency to listen to URL changes
+  }, [location.search]); 
 
   return (
     <>
       <header className="fixed top-0 left-0 w-full z-50 h-20 bg-gradient-to-r from-[#1e3a5f] via-[#0f2942] to-[#1e3a5f] shadow-lg border-b border-white/10">
         <div className="max-w-7xl mx-auto h-full flex items-center justify-between px-4">
-          {/* LOGO */}
           <Link to="/" className="flex items-center w-fit h-20 overflow-hidden">
             <img
               src={logo}
@@ -42,7 +40,6 @@ export default function Header() {
             />
           </Link>
 
-          {/* SEARCH */}
           <form
             onSubmit={handleSubmit}
             className="flex items-center bg-white rounded-md overflow-hidden h-10 w-full max-w-[600px] -ml-20 sm:-ml-30 mx-2"
@@ -61,8 +58,6 @@ export default function Header() {
               <FaSearch className="text-[#0f1e33] text-lg" />
             </button>
           </form>
-
-          {/* DESKTOP NAV */}
           <ul className="hidden sm:flex items-center gap-8 text-lg font-bold text-amber-300">
             <Link to="/">
               <li className="transition hover:text-[#27A9FF]">Home</li>
@@ -107,7 +102,6 @@ export default function Header() {
             )}
           </ul>
 
-          {/* HAMBURGER */}
           <button
             onClick={() => setMenuOpen(!menuOpen)}
             className="sm:hidden text-amber-300 text-2xl"
@@ -116,7 +110,6 @@ export default function Header() {
           </button>
         </div>
 
-        {/* MOBILE MENU */}
         {menuOpen && (
           <div className="sm:hidden bg-[#0f1e33] px-4 pb-4 space-y-4">
             <Link

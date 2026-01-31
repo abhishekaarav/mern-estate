@@ -56,7 +56,6 @@ export default function SignUp() {
       bg-[radial-gradient(ellipse_at_center,_#f3f4f3_0%,_#d1d5d1_45%,_#9fa3a0_100%)]"
     >
       <div className="w-full max-w-6xl rounded-2xl shadow-xl border border-slate-200 overflow-hidden grid grid-cols-1 md:grid-cols-2 bg-white">
-        {/* LEFT SIDE – IMAGE */}
         <div className="hidden md:block relative">
           <img
             src={img}
@@ -66,7 +65,6 @@ export default function SignUp() {
           <div className="absolute inset-0 bg-black/10" />
         </div>
 
-        {/* RIGHT SIDE – FORM */}
         <div className="p-12 bg-[#f8fbff]">
           <h1 className="text-3xl font-bold text-slate-900 mb-2 flex items-center gap-3">
             Create Account
@@ -78,7 +76,7 @@ export default function SignUp() {
           </p>
 
           <form onSubmit={handleSubmit} className="flex flex-col gap-6">
-            {/* USERNAME */}
+           
             <div
               className="flex items-center gap-3 border border-slate-300 rounded-xl px-4 py-3 bg-white
                             transition-all duration-300
@@ -95,7 +93,7 @@ export default function SignUp() {
               />
             </div>
 
-            {/* EMAIL */}
+           
             <div
               className="flex items-center gap-3 border border-slate-300 rounded-xl px-4 py-3 bg-white
                             transition-all duration-300
@@ -112,7 +110,7 @@ export default function SignUp() {
               />
             </div>
 
-            {/* PASSWORD */}
+            
             <div
               className="flex items-center gap-3 border border-slate-300 rounded-xl px-4 py-3 bg-white
                             transition-all duration-300
@@ -136,7 +134,6 @@ export default function SignUp() {
               </button>
             </div>
 
-            {/* CREATE ACCOUNT BUTTON */}
             <button
               disabled={loading}
               className="w-full flex items-center justify-center gap-3
@@ -151,11 +148,9 @@ export default function SignUp() {
               {loading ? "Creating Account..." : "Create Account"}
             </button>
 
-            {/* GOOGLE AUTH */}
             <OAuth />
           </form>
 
-          {/* FOOTER */}
           <div className="mt-8 text-sm text-slate-600 flex items-center gap-1">
             Already have an account?
             <Link

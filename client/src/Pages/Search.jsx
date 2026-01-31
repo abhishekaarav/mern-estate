@@ -82,7 +82,6 @@ export default function Search() {
       const newSearchTerm = e.target.value;
       setSidebardata({ ...sidebardata, searchTerm: newSearchTerm });
 
-      // Update URL in real-time to sync with navbar
       const urlParams = new URLSearchParams(location.search);
       urlParams.set("searchTerm", newSearchTerm);
       const newUrl = `${location.pathname}?${urlParams.toString()}`;
@@ -126,10 +125,8 @@ export default function Search() {
 
   return (
     <div className="flex flex-col md:flex-row bg-slate-50">
-      {/* SIDEBAR */}
       <div className="p-6 border-b-2 md:border-r-2 md:h-screen md:overflow-y-auto bg-white shadow-sm">
         <form onSubmit={handleSubmit} className="flex flex-col gap-6">
-          {/* Search Term */}
           <div className="flex flex-col gap-2">
             <label
               htmlFor="searchTerm"
@@ -147,8 +144,6 @@ export default function Search() {
               onChange={handleChange}
             />
           </div>
-
-          {/* Type */}
           <div className="flex flex-col gap-3">
             <div className="font-bold text-slate-800 flex items-center gap-2 text-sm">
               <FaHome className="text-slate-600" />
@@ -200,8 +195,6 @@ export default function Search() {
               </label>
             </div>
           </div>
-
-          {/* Amenities */}
           <div className="flex flex-col gap-3">
             <div className="font-bold text-slate-800 flex items-center gap-2 text-sm">
               <FaCouch className="text-slate-600" />
@@ -233,8 +226,6 @@ export default function Search() {
               </label>
             </div>
           </div>
-
-          {/* Sort */}
           <div className="flex flex-col gap-2">
             <label
               htmlFor="sort_order"
@@ -255,16 +246,12 @@ export default function Search() {
               <option value="createdAt_asc">Oldest</option>
             </select>
           </div>
-
-          {/* Search Button */}
           <button className="bg-slate-800 text-white p-3 rounded-lg font-semibold hover:bg-slate-900 transition-all duration-300 hover:shadow-lg flex items-center justify-center gap-2">
             <FaSearch />
             Search
           </button>
         </form>
       </div>
-
-      {/* RESULTS */}
       <div className="flex-1">
         <div className="bg-gradient-to-r from-slate-800 to-slate-700 p-6 shadow-md">
           <h1 className="text-3xl font-bold text-white flex items-center justify-center gap-3">

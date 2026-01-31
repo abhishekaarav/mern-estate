@@ -186,7 +186,7 @@ export default function UpdateListing() {
     }
   };
 
-  // Calculate discount details
+  
   const discountPercentage = formData.offer
     ? Math.round((formData.discountPrice / formData.regularPrice) * 100)
     : 0;
@@ -194,7 +194,7 @@ export default function UpdateListing() {
   return (
     <main className="min-h-screen bg-gradient-to-br from-slate-100 via-blue-50 to-indigo-100 py-8">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
+       
         <div className="bg-white rounded-2xl shadow-lg border-2 border-slate-200 p-6 mb-6">
           <div className="flex items-center gap-3">
             <div className="bg-gradient-to-br from-[#1a2942] to-[#0f1820] rounded-xl p-3">
@@ -213,16 +213,16 @@ export default function UpdateListing() {
 
         <form onSubmit={handleSubmit}>
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            {/* Left Column - Main Details */}
+            
             <div className="lg:col-span-2 space-y-5">
-              {/* Basic Information Card */}
+            
               <div className="bg-white rounded-2xl shadow-lg border-2 border-slate-200 p-6">
                 <h2 className="text-xl font-bold text-slate-800 mb-5">
                   Basic Information
                 </h2>
 
                 <div className="space-y-4">
-                  {/* Property Name */}
+                 
                   <div>
                     <label className="block text-sm font-semibold text-slate-700 mb-2">
                       Property Name
@@ -240,7 +240,7 @@ export default function UpdateListing() {
                     />
                   </div>
 
-                  {/* Description */}
+                  
                   <div>
                     <label className="block text-sm font-semibold text-slate-700 mb-2">
                       Description
@@ -255,7 +255,7 @@ export default function UpdateListing() {
                     />
                   </div>
 
-                  {/* Address */}
+                  
                   <div>
                     <label className="block text-sm font-semibold text-slate-700 mb-2 flex items-center gap-2">
                       <FaMapMarkerAlt className="text-red-500" />
@@ -274,14 +274,14 @@ export default function UpdateListing() {
                 </div>
               </div>
 
-              {/* Property Type & Features Card */}
+            
               <div className="bg-white rounded-2xl shadow-lg border-2 border-slate-200 p-6">
                 <h2 className="text-xl font-bold text-slate-800 mb-5">
                   Property Type & Features
                 </h2>
 
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-                  {/* Sale */}
+                  
                   <label
                     htmlFor="sale"
                     className="relative rounded-xl p-4 border-2 border-slate-300 bg-white cursor-pointer hover:border-slate-400 transition-all"
@@ -298,7 +298,6 @@ export default function UpdateListing() {
                     </span>
                   </label>
 
-                  {/* Rent */}
                   <label
                     htmlFor="rent"
                     className="relative rounded-xl p-4 border-2 border-slate-300 bg-white cursor-pointer hover:border-slate-400 transition-all"
@@ -315,7 +314,6 @@ export default function UpdateListing() {
                     </span>
                   </label>
 
-                  {/* Parking */}
                   <label
                     htmlFor="parking"
                     className="relative rounded-xl p-4 border-2 border-slate-300 bg-white cursor-pointer hover:border-slate-400 transition-all"
@@ -332,7 +330,6 @@ export default function UpdateListing() {
                     </span>
                   </label>
 
-                  {/* Furnished */}
                   <label
                     htmlFor="furnished"
                     className="relative rounded-xl p-4 border-2 border-slate-300 bg-white cursor-pointer hover:border-slate-400 transition-all"
@@ -349,7 +346,6 @@ export default function UpdateListing() {
                     </span>
                   </label>
 
-                  {/* Offer */}
                   <label
                     htmlFor="offer"
                     className="relative rounded-xl p-4 border-2 border-slate-300 bg-white cursor-pointer hover:border-slate-400 transition-all"
@@ -367,15 +363,12 @@ export default function UpdateListing() {
                   </label>
                 </div>
               </div>
-
-              {/* Room Details Card */}
               <div className="bg-white rounded-2xl shadow-lg border-2 border-slate-200 p-6">
                 <h2 className="text-xl font-bold text-slate-800 mb-5">
                   Room Details
                 </h2>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {/* Bedrooms */}
                   <div>
                     <label className="block text-sm font-medium text-slate-700 mb-2">
                       Bedrooms
@@ -392,7 +385,6 @@ export default function UpdateListing() {
                     />
                   </div>
 
-                  {/* Bathrooms */}
                   <div>
                     <label className="block text-sm font-medium text-slate-700 mb-2">
                       Bathrooms
@@ -411,14 +403,12 @@ export default function UpdateListing() {
                 </div>
               </div>
 
-              {/* Pricing Card */}
               <div className="bg-white rounded-2xl shadow-lg border-2 border-slate-200 p-6">
                 <h2 className="text-xl font-bold text-slate-800 mb-5">
                   Pricing
                 </h2>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {/* Regular Price */}
                   <div>
                     <label className="block text-sm font-medium text-slate-700 mb-2">
                       Regular Price
@@ -443,7 +433,6 @@ export default function UpdateListing() {
                     )}
                   </div>
 
-                  {/* Discount Price */}
                   {formData.offer && (
                     <div>
                       <label className="block text-sm font-medium text-slate-700 mb-2">
@@ -482,7 +471,6 @@ export default function UpdateListing() {
                 </div>
               </div>
 
-              {/* Images Upload Card */}
               <div className="bg-white rounded-2xl shadow-lg border-2 border-slate-200 p-6">
                 <h2 className="text-xl font-bold text-slate-800 mb-2">
                   Property Images
@@ -492,7 +480,6 @@ export default function UpdateListing() {
                   The first image will be the cover (max 6 images)
                 </p>
 
-                {/* Upload Section */}
                 <div className="bg-gradient-to-br from-slate-50 to-blue-50 rounded-xl p-5 border-2 border-dashed border-slate-300 mb-4">
                   <input
                     onChange={(e) => setFiles(e.target.files)}
@@ -512,8 +499,6 @@ export default function UpdateListing() {
                     {uploading ? "Uploading..." : "Upload Images"}
                   </button>
                 </div>
-
-                {/* Error Message */}
                 {imageUploadError && (
                   <div className="bg-red-50 border-2 border-red-200 rounded-xl p-3 mb-4">
                     <p className="text-red-700 text-sm font-semibold flex items-center gap-2">
@@ -523,7 +508,6 @@ export default function UpdateListing() {
                   </div>
                 )}
 
-                {/* Image Preview Grid */}
                 {formData.imageUrls.length > 0 && (
                   <div className="grid grid-cols-2 gap-3">
                     {formData.imageUrls.map((url, index) => (
@@ -555,10 +539,8 @@ export default function UpdateListing() {
               </div>
             </div>
 
-            {/* Right Column - Summary & Submit */}
             <div className="lg:col-span-1">
               <div className="sticky top-6 space-y-5">
-                {/* Summary Card */}
                 <div className="bg-gradient-to-br from-[#1a2942] to-[#0f1820] rounded-2xl shadow-lg p-6 text-white">
                   <h3 className="text-lg font-bold mb-4 flex items-center gap-2">
                     <MdVerified className="text-green-400" />
@@ -619,8 +601,6 @@ export default function UpdateListing() {
                     </div>
                   </div>
                 </div>
-
-                {/* Price Preview Card */}
                 {formData.regularPrice > 0 && (
                   <div className="bg-white rounded-2xl shadow-lg border-2 border-slate-200 p-6">
                     <h3 className="text-lg font-bold text-slate-800 mb-4">
@@ -664,8 +644,6 @@ export default function UpdateListing() {
                     </div>
                   </div>
                 )}
-
-                {/* Submit Button */}
                 <button
                   disabled={loading || uploading}
                   className="w-full p-4 bg-gradient-to-r from-[#1a2942] to-[#0f1820] text-white rounded-xl font-bold text-lg uppercase hover:from-[#0f1820] hover:to-[#1a2942] disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-lg hover:shadow-xl flex items-center justify-center gap-2"
@@ -682,8 +660,6 @@ export default function UpdateListing() {
                     </>
                   )}
                 </button>
-
-                {/* Error Message */}
                 {error && (
                   <div className="bg-red-50 border-2 border-red-200 rounded-xl p-4">
                     <p className="text-red-700 font-semibold text-sm flex items-center gap-2">

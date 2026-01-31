@@ -56,7 +56,6 @@ export default function Profile() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  /* ================= IMAGE UPLOAD (OLD LOGIC) ================= */
   useEffect(() => {
     if (file) handleFileUpload(file);
   }, [file]);
@@ -92,11 +91,9 @@ export default function Profile() {
     );
   };
 
-  /* ================= FORM ================= */
   const handleChange = (e) =>
     setFormData({ ...formData, [e.target.id]: e.target.value });
 
-  /* ================= UPDATE (FIXED) ================= */
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -120,7 +117,6 @@ export default function Profile() {
     }
   };
 
-  /* ================= DELETE (FIXED) ================= */
   const handleDeleteUser = async () => {
     try {
       dispatch(deleteUserStart());
@@ -141,7 +137,6 @@ export default function Profile() {
     }
   };
 
-  /* ================= SIGN OUT (FIXED) ================= */
   const handleSignOut = async () => {
     try {
       dispatch(signOutUserStart());
@@ -160,7 +155,6 @@ export default function Profile() {
     }
   };
 
-  /* ================= LISTINGS ================= */
   const handleShowListings = async () => {
     try {
       setActiveListings(true);
@@ -201,11 +195,9 @@ export default function Profile() {
     }
   };
 
-  /* ================= UI ================= */
   return (
     <div className="bg-slate-100 px-4 py-4">
       <div className="max-w-6xl mx-auto bg-white rounded-xl shadow-lg grid grid-cols-1 md:grid-cols-2 overflow-hidden">
-        {/* LEFT */}
         <div className="bg-gradient-to-br from-slate-900 to-slate-700 text-white p-6 flex flex-col items-center">
           <h2 className="text-3xl font-bold flex items-center gap-3">
             Welcome, {currentUser.username}
@@ -225,7 +217,6 @@ export default function Profile() {
           </p>
         </div>
 
-        {/* RIGHT */}
         <div className="p-10">
           <h1 className="text-4xl font-bold text-center mb-8 flex justify-center items-center gap-2">
             <FaUserCircle /> Profile
@@ -394,7 +385,6 @@ export default function Profile() {
         </div>
       </div>
 
-      {/* LISTINGS */}
       {userListings.length > 0 && (
         <div
           ref={listingsRef}
@@ -416,7 +406,6 @@ export default function Profile() {
                 key={listing._id}
                 className="bg-white rounded-xl border-2 border-slate-200 overflow-hidden hover:shadow-xl transition-all duration-300 group"
               >
-                {/* Image */}
                 <div className="relative h-48 overflow-hidden">
                   <img
                     src={listing.imageUrls[0]}
@@ -438,7 +427,6 @@ export default function Profile() {
                   )}
                 </div>
 
-                {/* Content */}
                 <div className="p-4">
                   <Link to={`/listing/${listing._id}`}>
                     <h3 className="text-lg font-bold text-slate-800 hover:text-slate-600 transition mb-2 line-clamp-1 flex items-center gap-2">
@@ -451,8 +439,6 @@ export default function Profile() {
                     <FaMapMarkerAlt className="text-red-500 mt-1 flex-shrink-0" />
                     <span className="line-clamp-1">{listing.address}</span>
                   </p>
-
-                  {/* Price */}
                   <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-lg p-3 mb-3">
                     <div className="flex items-baseline gap-1 text-white">
                       <FaRupeeSign className="text-sm" />
@@ -482,8 +468,6 @@ export default function Profile() {
                       </div>
                     )}
                   </div>
-
-                  {/* Features */}
                   <div className="flex items-center gap-4 mb-4 text-sm text-slate-600">
                     <div className="flex items-center gap-1">
                       <FaBed className="text-blue-600" />
@@ -495,7 +479,6 @@ export default function Profile() {
                     </div>
                   </div>
 
-                  {/* Actions */}
                   <div className="flex gap-2 pt-3 border-t border-slate-200">
                     <Link
                       to={`/update-listing/${listing._id}`}

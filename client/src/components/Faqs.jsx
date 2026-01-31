@@ -54,7 +54,7 @@ export default function Faqs() {
   return (
     <div className="bg-gradient-to-br from-slate-50 via-blue-50 to-slate-100 py-20 sm:py-24">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
+       
         <div className="text-center mb-12 sm:mb-16">
           <div className="inline-flex items-center justify-center gap-3 mb-6">
             <div className="bg-gradient-to-br from-[#1e3a5f] to-[#0f2942] w-14 h-14 rounded-xl flex items-center justify-center shadow-xl">
@@ -70,14 +70,14 @@ export default function Faqs() {
           </p>
         </div>
 
-        {/* FAQ Accordion */}
+     
         <div className="space-y-4">
           {faqs.map((faq, index) => (
             <div
               key={index}
               className="bg-white rounded-2xl shadow-md border-2 border-slate-200 overflow-hidden transition-all duration-300 hover:shadow-lg"
             >
-              {/* Question Button */}
+              
               <button
                 onClick={() => toggleFAQ(index)}
                 className="w-full text-left px-6 sm:px-8 py-5 sm:py-6 flex items-center justify-between gap-4 group"
@@ -92,7 +92,7 @@ export default function Faqs() {
                 />
               </button>
 
-              {/* Answer Content */}
+              
               <div
                 className={`transition-all duration-300 ease-in-out ${
                   openIndex === index
@@ -112,7 +112,7 @@ export default function Faqs() {
           ))}
         </div>
 
-        {/* Still Have Questions? */}
+        
         <div className="mt-12 sm:mt-16 text-center">
           <div className="bg-gradient-to-br from-[#1e3a5f] to-[#0f2942] rounded-2xl p-8 sm:p-10 shadow-xl">
             <h3 className="text-2xl sm:text-3xl font-bold text-white mb-3">

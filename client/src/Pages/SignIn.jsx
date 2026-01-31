@@ -60,7 +60,7 @@ export default function SignIn() {
                 bg-[radial-gradient(ellipse_at_center,_#f3f4f3_0%,_#d1d5d1_45%,_#9fa3a0_100%)]"
     >
       <div className="w-full max-w-6xl rounded-2xl shadow-xl border border-slate-200 overflow-hidden grid grid-cols-1 md:grid-cols-2 bg-white">
-        {/* LEFT SIDE */}
+
         <div className="p-12 bg-[#f8fbff]">
           <h1 className="text-3xl font-bold text-slate-900 mb-2 flex items-center gap-3">
             Welcome Back!
@@ -70,7 +70,7 @@ export default function SignIn() {
           <p className="text-slate-500 mb-8">Please sign in to your account</p>
 
           <form onSubmit={handleSubmit} className="flex flex-col gap-6">
-            {/* EMAIL */}
+           
             <div
               className="flex items-center gap-3 border border-slate-300 rounded-xl px-4 py-3 bg-white
                             transition-all duration-300
@@ -87,7 +87,7 @@ export default function SignIn() {
               />
             </div>
 
-            {/* PASSWORD */}
+            
             <div
               className="flex items-center gap-3 border border-slate-300 rounded-xl px-4 py-3 bg-white
                             transition-all duration-300
@@ -110,8 +110,6 @@ export default function SignIn() {
                 {showPassword ? <FaEyeSlash /> : <FaEye />}
               </button>
             </div>
-
-            {/* LOGIN BUTTON */}
             <button
               disabled={loading}
               className="w-full flex items-center justify-center gap-3
@@ -125,8 +123,6 @@ export default function SignIn() {
               <FaSignInAlt />
               {loading ? "Signing In..." : "Login"}
             </button>
-
-            {/* GOOGLE AUTH */}
             <OAuth />
           </form>
 
@@ -143,8 +139,6 @@ export default function SignIn() {
 
           {error && <p className="text-red-500 mt-4 text-sm">{error}</p>}
         </div>
-
-        {/* RIGHT SIDE IMAGE */}
         <div className="hidden md:block relative">
           <img
             src={img}

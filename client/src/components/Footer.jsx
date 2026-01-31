@@ -33,7 +33,7 @@ export default function Footer() {
     setLoading(true);
 
     try {
-      // OPTIONAL: Fetch offers (safe even if API fails)
+      
       let offersText = "Visit website for latest deals";
       let propertyLinks = `${window.location.origin}/search?offer=true`;
 
@@ -66,7 +66,7 @@ ${i + 1}. ${p.name}
       const autoReplyTemplate = "template_x4nvqim";
       const publicKey = "OYjVxUp6Y0sg_G5Ok";
 
-      // ADMIN MAIL (Admin ko notification)
+     
       await emailjs.send(
         serviceId,
         adminTemplate,
@@ -74,7 +74,7 @@ ${i + 1}. ${p.name}
         publicKey,
       );
 
-      // USER AUTO REPLY (User ko thank you + offers)
+     
       await emailjs.send(
         serviceId,
         autoReplyTemplate,
@@ -100,7 +100,7 @@ ${i + 1}. ${p.name}
 
   return (
     <footer className="relative bg-gradient-to-br from-[#1e3a5f] via-[#0f2942] to-[#1e3a5f] text-white overflow-hidden">
-      {/* Animated Background Pattern */}
+      
       <div className="absolute inset-0 opacity-[0.08]">
         <div
           className="absolute inset-0"
@@ -110,15 +110,15 @@ ${i + 1}. ${p.name}
         ></div>
       </div>
 
-      {/* Gradient Orbs */}
+      
       <div className="absolute top-0 left-0 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl"></div>
       <div className="absolute bottom-0 right-0 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl"></div>
 
       <div className="relative">
-        {/* Main Footer Content */}
+       
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-            {/* Column 1 - About */}
+           
             <div>
               <div className="flex items-center gap-2 mb-6">
                 <div className="bg-gradient-to-r from-blue-400 to-cyan-400 w-10 h-10 rounded-lg flex items-center justify-center">
@@ -154,7 +154,7 @@ ${i + 1}. ${p.name}
               </div>
             </div>
 
-            {/* Column 2 - Quick Links */}
+           
             <div>
               <h4 className="text-lg font-bold mb-6 flex items-center gap-2">
                 <div className="w-1 h-6 bg-gradient-to-b from-blue-400 to-cyan-400 rounded-full"></div>
@@ -218,7 +218,7 @@ ${i + 1}. ${p.name}
               </ul>
             </div>
 
-            {/* Column 3 - Services */}
+          
             <div>
               <h4 className="text-lg font-bold mb-6 flex items-center gap-2">
                 <div className="w-1 h-6 bg-gradient-to-b from-blue-400 to-cyan-400 rounded-full"></div>
@@ -252,7 +252,7 @@ ${i + 1}. ${p.name}
               </ul>
             </div>
 
-            {/* Column 4 - Newsletter & Social */}
+          
             <div>
               <h4 className="text-lg font-bold mb-6 flex items-center gap-2">
                 <div className="w-1 h-6 bg-gradient-to-b from-blue-400 to-cyan-400 rounded-full"></div>
@@ -262,7 +262,7 @@ ${i + 1}. ${p.name}
                 Subscribe to get latest property updates and exclusive deals.
               </p>
 
-              {/* Newsletter Form with Auto-Reply */}
+              
               <form onSubmit={handleSubscribe} className="mb-6">
                 <div className="flex gap-2">
                   <input
@@ -282,7 +282,7 @@ ${i + 1}. ${p.name}
                     {loading ? "..." : <FaEnvelope />}
                   </button>
                 </div>
-                {/* Success/Error Message */}
+               
                 {message && (
                   <p
                     className={`text-sm mt-2 ${message.includes("✅") ? "text-green-400" : "text-red-400"}`}
@@ -292,11 +292,11 @@ ${i + 1}. ${p.name}
                 )}
               </form>
 
-              {/* Social Media Links */}
+            
               <div>
                 <p className="text-sm font-semibold mb-4">Follow Us</p>
                 <div className="flex gap-3 flex-wrap">
-                  {/* Facebook */}
+                  
                   <a
                     href="https://www.facebook.com"
                     target="_blank"
@@ -307,7 +307,7 @@ ${i + 1}. ${p.name}
                     <FaFacebookF className="text-white group-hover:scale-110 transition-transform" />
                   </a>
 
-                  {/* X (Twitter) */}
+                  
                   <a
                     href="https://www.x.com"
                     target="_blank"
@@ -318,7 +318,7 @@ ${i + 1}. ${p.name}
                     <FaXTwitter className="text-white group-hover:scale-110 transition-transform" />
                   </a>
 
-                  {/* Instagram */}
+                  
                   <a
                     href="https://www.instagram.com"
                     target="_blank"
@@ -329,7 +329,7 @@ ${i + 1}. ${p.name}
                     <FaInstagram className="text-white group-hover:scale-110 transition-transform" />
                   </a>
 
-                  {/* YouTube */}
+                  
                   <a
                     href="https://www.youtube.com"
                     target="_blank"
@@ -340,7 +340,7 @@ ${i + 1}. ${p.name}
                     <FaYoutube className="text-white group-hover:scale-110 transition-transform" />
                   </a>
 
-                  {/* WhatsApp */}
+                  
                   <a
                     href="https://wa.me/919876543210"
                     target="_blank"
@@ -356,17 +356,15 @@ ${i + 1}. ${p.name}
           </div>
         </div>
 
-        {/* Bottom Bar */}
+     
         <div className="border-t border-white/10">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
             <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-              {/* Copyright */}
+      
               <p className="text-slate-300 text-sm text-center md:text-left">
                 © {currentYear} PrimeSpace. All rights reserved. Made with{" "}
                 <span className="text-red-400">❤️</span> in India
               </p>
-
-              {/* Legal Links */}
               <div className="flex gap-6 text-sm">
                 <Link
                   to="/privacy"

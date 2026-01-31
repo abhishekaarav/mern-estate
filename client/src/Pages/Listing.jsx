@@ -53,8 +53,7 @@ export default function Listing() {
     };
     fetchListing();
   }, [params.listingId]);
-
-  // Calculate discount details
+  
   const finalPrice = listing?.offer
     ? listing.regularPrice - listing.discountPrice
     : listing?.regularPrice;
@@ -94,7 +93,6 @@ export default function Listing() {
 
       {listing && !loading && !error && (
         <div>
-          {/* Image Slider - FIXED */}
           <div className="relative">
             <Swiper
               modules={[Navigation, Pagination, Autoplay]}
@@ -112,14 +110,11 @@ export default function Listing() {
                       alt={`Property ${index + 1}`}
                       className="h-full w-full object-cover"
                     />
-                    {/* Overlay gradient */}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
                   </div>
                 </SwiperSlide>
               ))}
             </Swiper>
-
-            {/* Share Button */}
             <div className="absolute top-6 right-6 z-10">
               <button
                 onClick={() => {
@@ -134,24 +129,18 @@ export default function Listing() {
                 <FaShare className="text-[#1a2942] text-lg group-hover:scale-110 transition-transform" />
               </button>
             </div>
-
-            {/* Copied Notification */}
             {copied && (
               <div className="fixed top-24 right-6 z-20 bg-[#1a2942] text-white px-6 py-3 rounded-xl shadow-2xl flex items-center gap-2 animate-bounce">
                 <FaCheckCircle className="text-green-400" />
                 <span className="font-semibold">Link copied!</span>
               </div>
             )}
-
-            {/* Property Type Badge */}
             <div className="absolute bottom-6 left-6 z-10">
               <span className="bg-gradient-to-r from-[#1a2942] to-[#0f1820] text-white px-6 py-3 rounded-xl text-sm font-bold uppercase tracking-wide shadow-2xl flex items-center gap-2">
                 <FaHome />
                 {listing.type === "rent" ? "For Rent" : "For Sale"}
               </span>
             </div>
-
-            {/* Offer Badge */}
             {listing.offer && (
               <div className="absolute bottom-6 right-6 z-10">
                 <span className="bg-gradient-to-r from-orange-500 to-amber-500 text-white px-6 py-3 rounded-xl text-sm font-bold uppercase tracking-wide shadow-2xl flex items-center gap-2">
@@ -161,13 +150,9 @@ export default function Listing() {
               </div>
             )}
           </div>
-
-          {/* Content Section */}
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-              {/* Left Column - Main Details */}
               <div className="lg:col-span-2 space-y-5">
-                {/* Title and Price Card */}
                 <div className="bg-white rounded-2xl shadow-lg border-2 border-slate-200 p-6">
                   <div className="flex items-start justify-between mb-4">
                     <div className="flex-1">
@@ -182,7 +167,6 @@ export default function Listing() {
                     <MdVerified className="text-green-500 text-3xl flex-shrink-0" />
                   </div>
 
-                  {/* Price Section */}
                   <div className="bg-gradient-to-br from-[#1a2942] to-[#0f1820] rounded-xl p-5 text-white">
                     <p className="text-xs font-semibold mb-2 text-slate-300">
                       {listing.type === "rent" ? "Monthly Rent" : "Sale Price"}
@@ -197,7 +181,6 @@ export default function Listing() {
                       )}
                     </div>
 
-                    {/* Discount Info */}
                     {listing.offer && (
                       <div className="mt-3 pt-3 border-t border-white/20 flex items-center justify-between">
                         <div className="flex items-center gap-3">
@@ -215,8 +198,6 @@ export default function Listing() {
                     )}
                   </div>
                 </div>
-
-                {/* Description Card */}
                 <div className="bg-white rounded-2xl shadow-lg border-2 border-slate-200 p-6">
                   <h2 className="text-xl font-bold text-slate-800 mb-3 flex items-center gap-2">
                     <div className="w-1 h-6 bg-gradient-to-b from-[#1a2942] to-[#0f1820] rounded-full"></div>
@@ -226,15 +207,12 @@ export default function Listing() {
                     {listing.description}
                   </p>
                 </div>
-
-                {/* Features Grid */}
                 <div className="bg-white rounded-2xl shadow-lg border-2 border-slate-200 p-6">
                   <h2 className="text-xl font-bold text-slate-800 mb-5 flex items-center gap-2">
                     <div className="w-1 h-6 bg-gradient-to-b from-[#1a2942] to-[#0f1820] rounded-full"></div>
                     Property Features
                   </h2>
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                    {/* Bedrooms */}
                     <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-4 border-2 border-blue-200">
                       <div className="flex flex-col items-center text-center gap-2">
                         <div className="bg-blue-600 rounded-lg p-2">
@@ -251,7 +229,6 @@ export default function Listing() {
                       </div>
                     </div>
 
-                    {/* Bathrooms */}
                     <div className="bg-gradient-to-br from-cyan-50 to-teal-50 rounded-xl p-4 border-2 border-cyan-200">
                       <div className="flex flex-col items-center text-center gap-2">
                         <div className="bg-cyan-600 rounded-lg p-2">
@@ -267,8 +244,6 @@ export default function Listing() {
                         </div>
                       </div>
                     </div>
-
-                    {/* Parking */}
                     <div
                       className={`rounded-xl p-4 border-2 ${
                         listing.parking
@@ -299,7 +274,6 @@ export default function Listing() {
                       </div>
                     </div>
 
-                    {/* Furnished */}
                     <div
                       className={`rounded-xl p-4 border-2 ${
                         listing.furnished
@@ -335,10 +309,8 @@ export default function Listing() {
                 </div>
               </div>
 
-              {/* Right Column - Contact Card */}
               <div className="lg:col-span-1">
                 <div className="sticky top-25 space-y-5">
-                  {/* Quick Info Card */}
                   <div className="bg-gradient-to-br from-[#1a2942] to-[#0f1820] rounded-2xl shadow-lg p-6 text-white">
                     <h3 className="text-lg font-bold mb-4">Quick Info</h3>
                     <div className="space-y-2.5 text-sm">
@@ -374,8 +346,6 @@ export default function Listing() {
                       </div>
                     </div>
                   </div>
-
-                  {/* Contact Card */}
                   {currentUser && listing.userRef !== currentUser._id && (
                     <div className="bg-white rounded-2xl shadow-lg border-2 border-slate-200 p-6">
                       <h2 className="text-xl font-bold text-slate-800 mb-3 flex items-center gap-2">

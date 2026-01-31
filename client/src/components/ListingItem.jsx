@@ -7,7 +7,6 @@ export default function ListingItem({ listing, onEdit, showEditButton }) {
   return (
     <div className="group bg-white rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden border-2 border-slate-200 hover:border-[#1a2942] w-full sm:w-[360px]">
       <Link to={`/listing/${listing._id}`}>
-        {/* Image Container */}
         <div className="relative overflow-hidden h-[240px] bg-slate-100">
           <img
             className="h-full w-full object-cover group-hover:scale-110 transition-transform duration-500"
@@ -18,14 +17,13 @@ export default function ListingItem({ listing, onEdit, showEditButton }) {
             alt="listing_cover"
           />
 
-          {/* Property Type Badge */}
           <div className="absolute top-4 left-4">
             <span className="bg-gradient-to-r from-[#1a2942] to-[#0f1820] text-white px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-wide shadow-lg">
               {listing.type === "rent" ? "For Rent" : "For Sale"}
             </span>
           </div>
 
-          {/* Offer Badge */}
+        
           {listing.offer && (
             <div className="absolute top-4 right-4">
               <span className="bg-gradient-to-r from-orange-500 to-amber-500 text-white px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-wide shadow-lg animate-pulse">
@@ -35,7 +33,6 @@ export default function ListingItem({ listing, onEdit, showEditButton }) {
           )}
         </div>
 
-        {/* Content Container */}
         <div className="p-5 flex flex-col gap-3">
           <h3 className="truncate text-xl font-bold text-slate-800 group-hover:text-[#1a2942] transition-colors">
             {listing.name}
@@ -52,7 +49,6 @@ export default function ListingItem({ listing, onEdit, showEditButton }) {
             {listing.description}
           </p>
 
-          {/* PRICE SECTION (LOGIC FIXED) */}
           <div className="mt-3 pt-3 border-t-2 border-slate-100">
             <div className="flex items-baseline gap-2">
               <FaRupeeSign className="text-[#1a2942] text-lg" />
@@ -71,7 +67,6 @@ export default function ListingItem({ listing, onEdit, showEditButton }) {
               )}
             </div>
 
-            {/* ORIGINAL PRICE + SAVE */}
             {listing.offer && (
               <div className="flex items-baseline gap-2 mt-1">
                 <span className="text-sm text-slate-400 line-through">
@@ -84,7 +79,6 @@ export default function ListingItem({ listing, onEdit, showEditButton }) {
             )}
           </div>
 
-          {/* Features */}
           <div className="flex items-center gap-5 mt-2">
             <div className="flex items-center gap-2 bg-slate-50 px-3 py-2 rounded-lg border border-slate-200">
               <FaBed className="text-[#1a2942] text-base" />

@@ -41,7 +41,6 @@ export default function CreateListing() {
   const [imageUploadError, setImageUploadError] = useState(false);
   const [error, setError] = useState(false);
 
-  /* IMAGE UPLOAD */
   const handleImageSubmit = () => {
     if (files.length > 0 && files.length + formData.imageUrls.length < 7) {
       setUploading(true);
@@ -147,7 +146,6 @@ export default function CreateListing() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-gray-50 to-slate-100 py-12 px-4">
       <div className="max-w-7xl mx-auto">
-        {/* Header Card */}
         <div className="bg-white rounded-3xl shadow-lg border border-slate-200 p-10 mb-8">
           <div className="flex items-center gap-5">
             <div className="bg-gradient-to-br from-[#1a2942] to-[#0f1820] p-5 rounded-2xl shadow-xl">
@@ -168,7 +166,6 @@ export default function CreateListing() {
           onSubmit={handleSubmit}
           className="grid grid-cols-1 lg:grid-cols-3 gap-8"
         >
-          {/* LEFT - Property Details */}
           <div className="lg:col-span-2 bg-white rounded-3xl shadow-lg border border-slate-200 p-10">
             <h2 className="text-2xl font-semibold text-slate-800 mb-8 flex items-center gap-3">
               <div className="w-1.5 h-8 bg-gradient-to-b from-[#1a2942] to-[#0f1820] rounded-full"></div>
@@ -220,7 +217,6 @@ export default function CreateListing() {
                 />
               </div>
 
-              {/* Property Type & Features */}
               <div className="pt-6">
                 <label className="block text-sm font-semibold text-slate-700 mb-4">
                   Property Type & Features
@@ -263,8 +259,6 @@ export default function CreateListing() {
                   ))}
                 </div>
               </div>
-
-              {/* Room Details */}
               <div className="pt-6">
                 <label className="block text-sm font-semibold text-slate-700 mb-4">
                   Room Details
@@ -302,7 +296,6 @@ export default function CreateListing() {
                 </div>
               </div>
 
-              {/* Pricing */}
               <div className="pt-6">
                 <label className="block text-sm font-semibold text-slate-700 mb-4">
                   Pricing
@@ -362,9 +355,7 @@ export default function CreateListing() {
             </div>
           </div>
 
-          {/* RIGHT - Images & Submit */}
           <div className="lg:col-span-1 space-y-8">
-            {/* Image Upload Card */}
             <div className="bg-white rounded-3xl shadow-lg border border-slate-200 p-8">
               <h2 className="text-2xl font-semibold text-slate-800 mb-3 flex items-center gap-3">
                 <FaImage className="text-[#1a2942]" />
@@ -402,7 +393,7 @@ export default function CreateListing() {
                 )}
               </div>
 
-              {/* Image Preview */}
+              
               {formData.imageUrls.length > 0 && (
                 <div className="mt-8 space-y-4">
                   <p className="text-sm font-semibold text-slate-700">
@@ -441,7 +432,6 @@ export default function CreateListing() {
               )}
             </div>
 
-            {/* Submit Button */}
             <div className="bg-white rounded-3xl shadow-lg border border-slate-200 p-8">
               <button
                 disabled={loading || uploading}

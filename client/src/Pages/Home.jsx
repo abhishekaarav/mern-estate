@@ -27,7 +27,6 @@ export default function Home() {
 
   SwiperCore.use([Navigation, Autoplay, Pagination, EffectFade]);
 
-  // Check if mobile
   useEffect(() => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 640);
@@ -77,9 +76,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-slate-100">
-      {/* ================= HERO SECTION WITH FEATURE BOXES ================= */}
       <div className="relative bg-gradient-to-br from-[#1e3a5f] via-[#0f2942] to-[#1e3a5f] overflow-hidden pb-32">
-        {/* Animated Background Pattern */}
         <div className="absolute inset-0 opacity-[0.15]">
           <div
             className="absolute inset-0 animate-pulse"
@@ -89,16 +86,11 @@ export default function Home() {
           ></div>
         </div>
 
-        {/* Gradient Orbs */}
         <div className="absolute top-0 left-0 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl"></div>
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl"></div>
-
-        {/* Hero Content */}
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-16">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
-            {/* Left Content */}
             <div className="text-white space-y-6">
-              {/* Badge */}
               <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md px-5 py-2.5 rounded-full border border-white/30 shadow-lg">
                 <MdTrendingUp className="text-emerald-400 text-lg" />
                 <span className="text-sm font-semibold tracking-wide">
@@ -106,7 +98,6 @@ export default function Home() {
                 </span>
               </div>
 
-              {/* Main Heading */}
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.1]">
                 Discover Spaces That
                 <span className="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-400 to-purple-400">
@@ -114,7 +105,6 @@ export default function Home() {
                 </span>
               </h1>
 
-              {/* Description */}
               <p className="text-lg sm:text-xl text-slate-200 leading-relaxed">
                 PrimeSpace connects you with carefully curated properties for
                 buying, selling, and renting — all in one trusted platform built
@@ -124,8 +114,6 @@ export default function Home() {
                   smarter real estate decisions.
                 </span>
               </p>
-
-              {/* CTA Buttons */}
               <div className="flex flex-col sm:flex-row gap-4 pt-4">
                 <Link
                   to="/search"
@@ -143,10 +131,7 @@ export default function Home() {
                 </Link>
               </div>
             </div>
-
-            {/* Right Side - Feature Boxes (2x2 Grid) */}
             <div className="grid grid-cols-2 gap-5 lg:gap-6">
-              {/* Buy Property Box */}
               <div className="bg-slate-800/60 backdrop-blur-sm border border-slate-700/50 rounded-2xl p-6 hover:bg-slate-800/80 transition-all duration-300 hover:border-slate-600/70 hover:transform hover:scale-105 group">
                 <div className="flex flex-col items-start h-full">
                   <div className="bg-gradient-to-br from-slate-900 to-slate-600 w-12 h-12 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
@@ -160,8 +145,6 @@ export default function Home() {
                   </p>
                 </div>
               </div>
-
-              {/* Rent Property Box */}
               <div className="bg-slate-800/60 backdrop-blur-sm border border-slate-700/50 rounded-2xl p-6 hover:bg-slate-800/80 transition-all duration-300 hover:border-slate-600/70 hover:transform hover:scale-105 group">
                 <div className="flex flex-col items-start h-full">
                   <div className="bg-gradient-to-br from-[#27A9FF] to-[#1e88e5] w-12 h-12 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
@@ -176,7 +159,6 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* Sell Property Box */}
               <div className="bg-slate-800/60 backdrop-blur-sm border border-slate-700/50 rounded-2xl p-6 hover:bg-slate-800/80 transition-all duration-300 hover:border-slate-600/70 hover:transform hover:scale-105 group">
                 <div className="flex flex-col items-start h-full">
                   <div className="bg-gradient-to-r from-blue-400 via-cyan-400 to-purple-400 w-12 h-12 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
@@ -191,7 +173,6 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* Special Offers Box */}
               <div className="bg-slate-800/60 backdrop-blur-sm border border-slate-700/50 rounded-2xl p-6 hover:bg-slate-800/80 transition-all duration-300 hover:border-slate-600/70 hover:transform hover:scale-105 group">
                 <div className="flex flex-col items-start h-full">
                   <div className="bg-gradient-to-br from-amber-300 to-amber-400 w-12 h-12 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
@@ -210,7 +191,7 @@ export default function Home() {
         </div>
       </div>
 
-      {/* ================= FULL WIDTH AUTO SWIPER ================= */}
+     
       {offerListings.length > 0 && (
         <div className="relative w-full -mt-16">
           <div className="w-full shadow-2xl">
@@ -239,10 +220,10 @@ export default function Home() {
                         alt={listing.name}
                         className="w-full h-full object-cover"
                       />
-                      {/* Gradient Overlay */}
+                    
                       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
 
-                      {/* Hover Overlay */}
+                      
                       <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                         <div className="absolute bottom-0 left-0 right-0 p-8 sm:p-12 lg:p-16">
                           <div className="max-w-7xl mx-auto">
@@ -260,7 +241,7 @@ export default function Home() {
                         </div>
                       </div>
 
-                      {/* DISCOUNT BADGE */}
+                      
                       <div className="absolute top-6 right-6 sm:top-8 sm:right-8">
                         {listing.offer &&
                           listing.regularPrice &&
@@ -286,10 +267,10 @@ export default function Home() {
         </div>
       )}
 
-      {/* ================= LISTINGS SECTIONS ================= */}
+      
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-24">
         <div className="space-y-20">
-          {/* Recent Offers */}
+          
           {offerListings.length > 0 && (
             <section>
               <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between mb-10 gap-4">
@@ -334,7 +315,6 @@ export default function Home() {
             </section>
           )}
 
-          {/* Recent Rentals */}
           {rentListings.length > 0 && (
             <section>
               <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between mb-10 gap-4">
@@ -379,7 +359,6 @@ export default function Home() {
             </section>
           )}
 
-          {/* Recent Sales */}
           {saleListings.length > 0 && (
             <section>
               <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between mb-10 gap-4">
@@ -426,9 +405,7 @@ export default function Home() {
         </div>
       </div>
 
-      {/* ================= CTA SECTION ================= */}
       <div className="bg-gradient-to-br from-[#1e3a5f] via-[#0f2942] to-[#1e3a5f] py-24 relative overflow-hidden">
-        {/* Background Pattern */}
         <div className="absolute inset-0 opacity-10">
           <div
             className="absolute inset-0"
