@@ -301,7 +301,7 @@ export default function Search() {
                 <div className="text-center mt-8">
                   <button
                     onClick={() => setShowMore(!showMore)}
-                    className="bg-emerald-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-emerald-700 transition-all duration-300 hover:shadow-lg inline-flex items-center gap-2"
+                    className="bg-zinc-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-zinc-700 transition-all duration-300 hover:shadow-lg inline-flex items-center gap-2"
                   >
                     <FaHome />
                     {showMore
