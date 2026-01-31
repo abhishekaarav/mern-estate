@@ -18,8 +18,23 @@ import {
 } from "../redux/user/userSlice";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { FaUserCircle, FaTrash, FaSignOutAlt, FaListUl } from "react-icons/fa";
+import {
+  FaUserCircle,
+  FaTrash,
+  FaSignOutAlt,
+  FaListUl,
+  FaEdit,
+  FaHome,
+  FaBed,
+  FaBath,
+  FaRupeeSign,
+  FaMapMarkerAlt,
+  FaPlus,
+  FaEye,
+  FaEyeSlash,
+} from "react-icons/fa";
 import { HiHand } from "react-icons/hi";
+import { MdVerified } from "react-icons/md";
 
 export default function Profile() {
   const fileRef = useRef(null);
@@ -35,6 +50,8 @@ export default function Profile() {
   const [showListingsError, setShowListingsError] = useState(false);
   const [userListings, setUserListings] = useState([]);
   const [activeListings, setActiveListings] = useState(false);
+  const [showCurrentPassword, setShowCurrentPassword] = useState(false);
+  const [showNewPassword, setShowNewPassword] = useState(false);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -43,6 +60,15 @@ export default function Profile() {
   useEffect(() => {
     if (file) handleFileUpload(file);
   }, [file]);
+
+  useEffect(() => {
+    if (updateSuccess) {
+      const timer = setTimeout(() => {
+        setUpdateSuccess(false);
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [updateSuccess]);
 
   const handleFileUpload = (file) => {
     const storage = getStorage(app);
@@ -87,7 +113,7 @@ export default function Profile() {
         return;
       }
 
-      dispatch(updateUserSuccess(data)); // ✅ OLD LOGIC RESTORED
+      dispatch(updateUserSuccess(data));
       setUpdateSuccess(true);
     } catch (error) {
       dispatch(updateUserFailure(error.message));
@@ -108,7 +134,7 @@ export default function Profile() {
         return;
       }
 
-      dispatch(deleteUserSuccess(data)); // ✅ OLD LOGIC
+      dispatch(deleteUserSuccess(data));
       navigate("/sign-in");
     } catch (error) {
       dispatch(deleteUserFailure(error.message));
@@ -127,7 +153,7 @@ export default function Profile() {
         return;
       }
 
-      dispatch(deleteUserSuccess(data)); // ✅ SAME AS OLD CODE
+      dispatch(deleteUserSuccess(data));
       navigate("/sign-in");
     } catch (error) {
       dispatch(deleteUserFailure(error.message));
@@ -181,7 +207,7 @@ export default function Profile() {
       <div className="max-w-6xl mx-auto bg-white rounded-xl shadow-lg grid grid-cols-1 md:grid-cols-2 overflow-hidden">
         {/* LEFT */}
         <div className="bg-gradient-to-br from-slate-900 to-slate-700 text-white p-6 flex flex-col items-center">
-          <h2 className="text-3xl font-bold  flex items-center gap-3">
+          <h2 className="text-3xl font-bold flex items-center gap-3">
             Welcome, {currentUser.username}
             <HiHand className="text-yellow-400 text-4xl animate-pulse" />
           </h2>
@@ -189,7 +215,7 @@ export default function Profile() {
           <img
             src={formData.avatar || currentUser.avatar}
             alt="profile"
-            className="h-[500px] w-[400px] rounded-2xl object-cover shadow-2xl mb-6 mt-6"
+            className="h-[500px] w-[400px] rounded-2xl object-cover shadow-2xl mb-6 mt-6 transition-transform duration-300 hover:scale-105 hover:shadow-slate-900/50"
           />
 
           <p className="text-lg font-medium">{currentUser.email}</p>
@@ -201,11 +227,11 @@ export default function Profile() {
 
         {/* RIGHT */}
         <div className="p-10">
-          <h1 className="text-4xl font-bold text-center mb-8 flex justify-center gap-2">
+          <h1 className="text-4xl font-bold text-center mb-8 flex justify-center items-center gap-2">
             <FaUserCircle /> Profile
           </h1>
 
-          <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+          <form onSubmit={handleSubmit} className="flex flex-col gap-4">
             <input
               type="file"
               ref={fileRef}
@@ -218,10 +244,10 @@ export default function Profile() {
               onClick={() => fileRef.current.click()}
               src={formData.avatar || currentUser.avatar}
               alt="avatar"
-              className="h-28 w-28 rounded-full object-cover self-center cursor-pointer border-4 border-slate-300 hover:scale-105 transition"
+              className="h-24 w-24 rounded-full object-cover self-center cursor-pointer border-4 border-slate-300 hover:scale-105 transition"
             />
 
-            <p className="text-center font-medium">
+            <p className="text-center font-medium text-sm">
               {fileUploadError && (
                 <span className="text-red-600">Upload failed</span>
               )}
@@ -233,50 +259,122 @@ export default function Profile() {
               )}
             </p>
 
-            <input
-              type="text"
-              id="username"
-              defaultValue={currentUser.username}
-              onChange={handleChange}
-              className="border rounded-xl px-5 py-4 text-lg"
-            />
-            <input
-              type="email"
-              id="email"
-              defaultValue={currentUser.email}
-              onChange={handleChange}
-              className="border rounded-xl px-5 py-4 text-lg"
-            />
-            <input
-              type="password"
-              id="password"
-              placeholder="New Password"
-              onChange={handleChange}
-              className="border rounded-xl px-5 py-4 text-lg"
-            />
+            <div>
+              <label
+                htmlFor="username"
+                className="block text-sm font-semibold text-slate-700 mb-2"
+              >
+                Name
+              </label>
+              <input
+                type="text"
+                id="username"
+                defaultValue={currentUser.username}
+                onChange={handleChange}
+                className="w-full border rounded-xl px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-slate-400"
+              />
+            </div>
 
-            <button className="bg-slate-800 text-white py-4 rounded-xl text-lg font-semibold hover:bg-slate-900 transition">
+            <div>
+              <label
+                htmlFor="email"
+                className="block text-sm font-semibold text-slate-700 mb-2"
+              >
+                Email
+              </label>
+              <input
+                type="email"
+                id="email"
+                defaultValue={currentUser.email}
+                onChange={handleChange}
+                className="w-full border rounded-xl px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-slate-400"
+              />
+            </div>
+
+            <div className="mt-2">
+              <label className="block text-sm font-semibold text-slate-700 mb-3">
+                Change Password
+              </label>
+
+              <div className="mb-3 relative">
+                <input
+                  type={showCurrentPassword ? "text" : "password"}
+                  id="currentPassword"
+                  placeholder="Current Password"
+                  onChange={handleChange}
+                  className="w-full border rounded-xl px-4 py-3 pr-12 text-base focus:outline-none focus:ring-2 focus:ring-slate-400"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowCurrentPassword(!showCurrentPassword)}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-700 transition"
+                >
+                  {showCurrentPassword ? (
+                    <FaEyeSlash size={18} />
+                  ) : (
+                    <FaEye size={18} />
+                  )}
+                </button>
+              </div>
+
+              <div className="relative">
+                <input
+                  type={showNewPassword ? "text" : "password"}
+                  id="password"
+                  placeholder="New Password"
+                  onChange={handleChange}
+                  className="w-full border rounded-xl px-4 py-3 pr-12 text-base focus:outline-none focus:ring-2 focus:ring-slate-400"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowNewPassword(!showNewPassword)}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-700 transition"
+                >
+                  {showNewPassword ? (
+                    <FaEyeSlash size={18} />
+                  ) : (
+                    <FaEye size={18} />
+                  )}
+                </button>
+              </div>
+            </div>
+
+            <button className="bg-slate-800 text-white py-3 rounded-xl text-base font-semibold hover:opacity-90 hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-2 mt-2">
+              <FaUserCircle />
               {loading ? "Updating..." : "Update Profile"}
             </button>
 
+            {updateSuccess && (
+              <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-xl text-center font-medium animate-pulse">
+                ✓ Profile updated successfully!
+              </div>
+            )}
+
+            {error && (
+              <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-xl text-center font-medium">
+                ✗ {error}
+              </div>
+            )}
+
             <Link
               to="/create-listing"
-              className="bg-emerald-600 text-white py-4 rounded-xl text-lg text-center font-semibold hover:bg-emerald-700 transition"
+              className="bg-emerald-600 text-white py-3 rounded-xl text-base text-center font-semibold hover:opacity-90 hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-2"
             >
+              <FaPlus />
               Create Listing
             </Link>
           </form>
 
-          <div className="flex justify-between mt-8 text-lg">
+          <div className="flex justify-between items-center mt-6 text-base">
             <span
               onClick={handleDeleteUser}
-              className="text-red-600 cursor-pointer flex items-center gap-2 hover:text-red-700 transition"
+              className="text-red-600 cursor-pointer flex items-center gap-2 hover:opacity-80 hover:scale-105 transition-all duration-300"
             >
               <FaTrash /> Delete
             </span>
             <span
               onClick={handleSignOut}
-              className="text-red-600 cursor-pointer flex items-center gap-2 hover:text-red-700 transition"
+              className="text-red-600 cursor-pointer flex items-center gap-2 hover:opacity-80 hover:scale-105 transition-all duration-300"
             >
               <FaSignOutAlt /> Sign out
             </span>
@@ -284,13 +382,14 @@ export default function Profile() {
 
           <button
             onClick={handleShowListings}
-            className={`mt-10 w-full py-4 rounded-xl text-lg font-semibold flex justify-center gap-2 transition ${
+            className={`mt-8 w-full py-3 rounded-xl text-base font-semibold flex items-center justify-center gap-2 transition-all duration-300 ${
               activeListings
-                ? "bg-slate-800 text-white"
-                : "bg-slate-200 hover:bg-slate-300"
+                ? "bg-slate-800 text-white hover:opacity-90 hover:shadow-lg"
+                : "bg-slate-200 hover:bg-slate-300 hover:shadow-md"
             }`}
           >
-            <FaListUl /> Show Listings
+            <FaListUl />
+            Show Listings
           </button>
         </div>
       </div>
@@ -301,38 +400,118 @@ export default function Profile() {
           ref={listingsRef}
           className="max-w-6xl mx-auto mt-14 bg-white p-8 rounded-2xl shadow-xl"
         >
-          <h2 className="text-3xl font-bold text-center mb-8">Your Listings</h2>
+          <div className="flex items-center justify-center mb-8">
+            <h2 className="text-3xl font-bold text-slate-800 flex items-center gap-3">
+              <FaHome className="text-slate-700" />
+              Your Listings
+              <span className="text-lg font-normal text-slate-500">
+                ({userListings.length})
+              </span>
+            </h2>
+          </div>
 
-          <div className="flex flex-col gap-5">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {userListings.map((listing) => (
               <div
                 key={listing._id}
-                className="border rounded-xl p-4 flex items-center gap-4 hover:shadow transition"
+                className="bg-white rounded-xl border-2 border-slate-200 overflow-hidden hover:shadow-xl transition-all duration-300 group"
               >
-                <img
-                  src={listing.imageUrls[0]}
-                  alt="listing"
-                  className="h-24 w-24 rounded-lg object-cover"
-                />
-                <Link
-                  to={`/listing/${listing._id}`}
-                  className="flex-1 text-lg font-semibold hover:underline"
-                >
-                  {listing.name}
-                </Link>
-                <div className="flex flex-col">
-                  <button
-                    onClick={() => handleListingDelete(listing._id)}
-                    className="text-red-600 hover:text-red-700 transition"
-                  >
-                    Delete
-                  </button>
-                  <Link
-                    to={`/update-listing/${listing._id}`}
-                    className="text-emerald-600 hover:text-emerald-700 transition"
-                  >
-                    Edit
+                {/* Image */}
+                <div className="relative h-48 overflow-hidden">
+                  <img
+                    src={listing.imageUrls[0]}
+                    alt={listing.name}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                  />
+                  <div className="absolute top-3 right-3">
+                    <span className="bg-gradient-to-r from-slate-800 to-slate-900 text-white px-3 py-1 rounded-lg text-xs font-bold uppercase flex items-center gap-1">
+                      <FaHome className="text-xs" />
+                      {listing.type === "rent" ? "Rent" : "Sale"}
+                    </span>
+                  </div>
+                  {listing.offer && (
+                    <div className="absolute top-3 left-3">
+                      <span className="bg-gradient-to-r from-orange-500 to-amber-500 text-white px-3 py-1 rounded-lg text-xs font-bold uppercase">
+                        Special Offer
+                      </span>
+                    </div>
+                  )}
+                </div>
+
+                {/* Content */}
+                <div className="p-4">
+                  <Link to={`/listing/${listing._id}`}>
+                    <h3 className="text-lg font-bold text-slate-800 hover:text-slate-600 transition mb-2 line-clamp-1 flex items-center gap-2">
+                      <MdVerified className="text-green-500 flex-shrink-0" />
+                      {listing.name}
+                    </h3>
                   </Link>
+
+                  <p className="text-sm text-slate-600 mb-3 flex items-start gap-2">
+                    <FaMapMarkerAlt className="text-red-500 mt-1 flex-shrink-0" />
+                    <span className="line-clamp-1">{listing.address}</span>
+                  </p>
+
+                  {/* Price */}
+                  <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-lg p-3 mb-3">
+                    <div className="flex items-baseline gap-1 text-white">
+                      <FaRupeeSign className="text-sm" />
+                      <span className="text-xl font-bold">
+                        {listing.offer
+                          ? (
+                              listing.regularPrice - listing.discountPrice
+                            ).toLocaleString("en-IN")
+                          : listing.regularPrice.toLocaleString("en-IN")}
+                      </span>
+                      {listing.type === "rent" && (
+                        <span className="text-xs text-slate-300">/month</span>
+                      )}
+                    </div>
+                    {listing.offer && (
+                      <div className="flex items-center gap-2 mt-1">
+                        <span className="text-xs text-slate-400 line-through">
+                          ₹{listing.regularPrice.toLocaleString("en-IN")}
+                        </span>
+                        <span className="text-xs bg-orange-500 text-white px-2 py-0.5 rounded font-bold">
+                          {Math.round(
+                            (listing.discountPrice / listing.regularPrice) *
+                              100,
+                          )}
+                          % OFF
+                        </span>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Features */}
+                  <div className="flex items-center gap-4 mb-4 text-sm text-slate-600">
+                    <div className="flex items-center gap-1">
+                      <FaBed className="text-blue-600" />
+                      <span className="font-medium">{listing.bedrooms}</span>
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <FaBath className="text-cyan-600" />
+                      <span className="font-medium">{listing.bathrooms}</span>
+                    </div>
+                  </div>
+
+                  {/* Actions */}
+                  <div className="flex gap-2 pt-3 border-t border-slate-200">
+                    <Link
+                      to={`/update-listing/${listing._id}`}
+                      className="flex-1 bg-slate-800 text-white py-2 rounded-lg font-semibold hover:opacity-90 hover:shadow-lg transition-all duration-300 text-center flex items-center justify-center gap-2 text-sm"
+                    >
+                      <FaEdit />
+                      Edit
+                    </Link>
+                    <button
+                      onClick={() => handleListingDelete(listing._id)}
+                      className="flex-1 bg-red-600 text-white py-2 rounded-lg font-semibold hover:opacity-90 hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-2 text-sm"
+                    >
+                      <FaTrash />
+                      Delete
+                    </button>
+                  </div>
                 </div>
               </div>
             ))}

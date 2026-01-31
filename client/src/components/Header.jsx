@@ -11,7 +11,6 @@ export default function Header() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  /* 🔍 SEARCH LOGIC — SAME AS OLD */
   const handleSubmit = (e) => {
     e.preventDefault();
     const urlParams = new URLSearchParams(window.location.search);
@@ -19,36 +18,34 @@ export default function Header() {
     navigate(`/search?${urlParams.toString()}`);
   };
 
+  // Update search term when URL changes (syncs with Search page)
   useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search);
+    const urlParams = new URLSearchParams(location.search);
     const searchTermFromUrl = urlParams.get("searchTerm");
-    if (searchTermFromUrl) setSearchTerm(searchTermFromUrl);
-  }, []);
+    if (searchTermFromUrl) {
+      setSearchTerm(searchTermFromUrl);
+    } else {
+      setSearchTerm("");
+    }
+  }, [location.search]); // Added dependency to listen to URL changes
 
   return (
     <>
-      {/* HEADER */}
-      <header className="fixed top-0 left-0 w-full z-50 h-20 bg-[#0f1e33] shadow-md">
+      <header className="fixed top-0 left-0 w-full z-50 h-20 bg-gradient-to-r from-[#1e3a5f] via-[#0f2942] to-[#1e3a5f] shadow-lg border-b border-white/10">
         <div className="max-w-7xl mx-auto h-full flex items-center justify-between px-4">
-          {/* LOGO — LEFT SHIFT */}
-          <Link to="/" className="flex items-center">
+          {/* LOGO */}
+          <Link to="/" className="flex items-center w-fit h-20 overflow-hidden">
             <img
               src={logo}
               alt="PrimeSpace Logo"
-              className="h-[300px] w-auto object-contain mt-5 -ml-20"
+              className="h-[300px] w-auto object-contain mt-5 -ml-20 pointer-events-none"
             />
           </Link>
 
-          {/* SEARCH — LEFT SHIFT BUT RESPONSIVE */}
+          {/* SEARCH */}
           <form
             onSubmit={handleSubmit}
-            className="
-              flex items-center bg-white rounded-md overflow-hidden h-10
-              w-full max-w-[600px]
-              -ml-20
-              sm:-ml-30
-              mx-2
-            "
+            className="flex items-center bg-white rounded-md overflow-hidden h-10 w-full max-w-[600px] -ml-20 sm:-ml-30 mx-2"
           >
             <input
               type="text"
@@ -59,19 +56,20 @@ export default function Header() {
             />
             <button
               type="submit"
-              className="bg-blue-600 h-full px-5 flex items-center justify-center hover:bg-blue-700 transition"
+              className="bg-gradient-to-r from-amber-400 to-yellow-300 h-full px-5 flex items-center justify-center hover:from-amber-500 hover:to-yellow-400 transition"
             >
-              <FaSearch className="text-white text-lg" />
+              <FaSearch className="text-[#0f1e33] text-lg" />
             </button>
           </form>
 
           {/* DESKTOP NAV */}
-          <ul className="hidden sm:flex items-center gap-8 text-lg font-bold text-white">
+          <ul className="hidden sm:flex items-center gap-8 text-lg font-bold text-amber-300">
             <Link to="/">
-              <li className="hover:text-blue-400 transition">Home</li>
+              <li className="transition hover:text-[#27A9FF]">Home</li>
             </Link>
+
             <Link to="/about">
-              <li className="hover:text-blue-400 transition">About</li>
+              <li className="transition hover:text-[#27A9FF]">About</li>
             </Link>
 
             {currentUser ? (
@@ -79,27 +77,28 @@ export default function Header() {
                 <img
                   src={currentUser.avatar}
                   alt="profile"
-                  className="h-10 w-10 rounded-full object-cover border-2 border-blue-500"
+                  className="h-10 w-10 rounded-full object-cover border-2 border-amber-400"
                 />
               </Link>
             ) : (
-              <li className="flex items-center border border-blue-500 rounded-md overflow-hidden text-sm">
+              <li className="flex items-center border border-amber-400 rounded-md overflow-hidden text-sm">
                 <Link
                   to="/sign-in"
                   className={`px-4 py-1 transition ${
                     location.pathname === "/sign-in"
-                      ? "bg-blue-500 text-white"
-                      : "text-white hover:bg-blue-500/20"
+                      ? "bg-gradient-to-r from-amber-400 to-yellow-300 text-[#0f1e33]"
+                      : "text-amber-300 hover:text-[#27A9FF]"
                   }`}
                 >
                   Sign In
                 </Link>
+
                 <Link
                   to="/sign-up"
                   className={`px-4 py-1 transition ${
                     location.pathname === "/sign-up"
-                      ? "bg-blue-500 text-white"
-                      : "text-white hover:bg-blue-500/20"
+                      ? "bg-gradient-to-r from-amber-400 to-yellow-300 text-[#0f1e33]"
+                      : "text-amber-300 hover:text-[#27A9FF]"
                   }`}
                 >
                   Sign Up
@@ -108,10 +107,10 @@ export default function Header() {
             )}
           </ul>
 
-          {/* HAMBURGER — MOBILE */}
+          {/* HAMBURGER */}
           <button
             onClick={() => setMenuOpen(!menuOpen)}
-            className="sm:hidden text-white text-2xl"
+            className="sm:hidden text-amber-300 text-2xl"
           >
             {menuOpen ? <FaTimes /> : <FaBars />}
           </button>
@@ -123,7 +122,7 @@ export default function Header() {
             <Link
               to="/"
               onClick={() => setMenuOpen(false)}
-              className="block text-white text-lg font-bold hover:text-blue-400"
+              className="block text-amber-300 text-lg font-bold hover:text-[#27A9FF]"
             >
               Home
             </Link>
@@ -131,7 +130,7 @@ export default function Header() {
             <Link
               to="/about"
               onClick={() => setMenuOpen(false)}
-              className="block text-white text-lg font-bold hover:text-blue-400"
+              className="block text-amber-300 text-lg font-bold hover:text-[#27A9FF]"
             >
               About
             </Link>
@@ -145,23 +144,23 @@ export default function Header() {
                 <img
                   src={currentUser.avatar}
                   alt="profile"
-                  className="h-10 w-10 rounded-full object-cover border-2 border-blue-500"
+                  className="h-10 w-10 rounded-full object-cover border-2 border-amber-400"
                 />
-                <span className="text-white font-bold">Profile</span>
+                <span className="text-amber-300 font-bold">Profile</span>
               </Link>
             ) : (
               <div className="flex gap-4">
                 <Link
                   to="/sign-in"
                   onClick={() => setMenuOpen(false)}
-                  className="text-white border border-blue-500 px-4 py-1 rounded"
+                  className="text-amber-300 border border-amber-400 px-4 py-1 rounded hover:text-[#27A9FF]"
                 >
                   Sign In
                 </Link>
                 <Link
                   to="/sign-up"
                   onClick={() => setMenuOpen(false)}
-                  className="text-white border border-blue-500 px-4 py-1 rounded"
+                  className="text-amber-300 border border-amber-400 px-4 py-1 rounded hover:text-[#27A9FF]"
                 >
                   Sign Up
                 </Link>
@@ -171,7 +170,6 @@ export default function Header() {
         )}
       </header>
 
-      {/* PAGE OFFSET */}
       <div className="pt-20" />
     </>
   );
