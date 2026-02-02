@@ -153,7 +153,7 @@ export default function CreateListing() {
             </div>
             <div>
               <h1 className="text-4xl font-bold text-slate-800">
-                Create New Listing
+                Add New Property
               </h1>
               <p className="text-slate-500 mt-2 text-lg">
                 Fill in the details to publish your property
@@ -438,7 +438,7 @@ export default function CreateListing() {
                 className="w-full bg-gradient-to-r from-orange-600 to-amber-600 text-white py-5 rounded-xl font-bold text-lg hover:from-orange-700 hover:to-amber-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex justify-center items-center gap-3 shadow-xl"
               >
                 <FaCheckCircle className="text-2xl" />
-                <span>{loading ? "Publishing..." : "Publish Listing"}</span>
+                <span>{loading ? "Publishing..." : "Publish Property"}</span>
               </button>
 
               {error && (

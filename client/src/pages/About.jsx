@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import img1 from "../assets/AboutPageImg1.jpg";
 import img2 from "../assets/AboutPageImg2.jpeg";
 import img3 from "../assets/AboutPageImg3.jpeg";
@@ -13,12 +13,70 @@ import {
   FaLightbulb,
 } from "react-icons/fa";
 
+function Counter({ end, suffix = "", duration = 2000 }) {
+  const [count, setCount] = useState(0);
+  const [isVisible, setIsVisible] = useState(false);
+  const counterRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !isVisible) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.5 },
+    );
+
+    if (counterRef.current) {
+      observer.observe(counterRef.current);
+    }
+
+    return () => {
+      if (counterRef.current) {
+        observer.unobserve(counterRef.current);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!isVisible) return;
+
+    let startTime;
+    let animationFrame;
+
+    const animate = (currentTime) => {
+      if (!startTime) startTime = currentTime;
+      const progress = Math.min((currentTime - startTime) / duration, 1);
+
+      setCount(Math.floor(progress * end));
+
+      if (progress < 1) {
+        animationFrame = requestAnimationFrame(animate);
+      }
+    };
+
+    animationFrame = requestAnimationFrame(animate);
+
+    return () => {
+      if (animationFrame) {
+        cancelAnimationFrame(animationFrame);
+      }
+    };
+  }, [isVisible, end, duration]);
+
+  return (
+    <span ref={counterRef}>
+      {count}
+      {suffix}
+    </span>
+  );
+}
+
 export default function About() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-slate-100">
-      {/* ================= HERO SECTION ================= */}
       <section className="relative bg-gradient-to-br from-[#1e3a5f] via-[#0f2942] to-[#1e3a5f] text-white py-5 px-6 overflow-hidden">
-        {/* Animated Background Pattern */}
         <div className="absolute inset-0 opacity-[0.15]">
           <div
             className="absolute inset-0 animate-pulse"
@@ -28,7 +86,6 @@ export default function About() {
           ></div>
         </div>
 
-        {/* Gradient Orbs */}
         <div className="absolute top-0 left-0 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl"></div>
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl"></div>
 
@@ -40,7 +97,7 @@ export default function About() {
 
           <h1 className="text-4xl md:text-6xl font-extrabold mb-6 leading-tight">
             Redefining Real Estate
-            <span className="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-400 to-purple-400">
+            <span className="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-400 to-purple-200">
               with Innovation & Trust
             </span>
           </h1>
@@ -60,20 +117,17 @@ export default function About() {
               <span className="font-semibold">100% Verified</span>
             </div>
             <div className="flex items-center gap-2 bg-white/10 backdrop-blur-md px-5 py-3 rounded-xl border border-white/20">
-              <FaUsers className="text-purple-400 text-lg" />
+              <FaUsers className="text-purple-200 text-lg" />
               <span className="font-semibold">10,000+ Users</span>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ================= WHO WE ARE ================= */}
       <section className="py-24 px-6 max-w-7xl mx-auto relative">
-        {/* Decorative Element */}
         <div className="absolute top-20 right-0 w-72 h-72 bg-blue-200/30 rounded-full blur-3xl -z-10"></div>
 
         <div className="grid md:grid-cols-2 gap-16 items-center">
-          {/* TEXT */}
           <div className="space-y-6">
             <div className="inline-flex items-center gap-3 bg-gradient-to-br from-slate-900 to-slate-600 px-4 py-2 rounded-full">
               <FaBuilding className="text-white text-xl" />
@@ -138,7 +192,6 @@ export default function About() {
             </div>
           </div>
 
-          {/* IMAGE */}
           <div className="relative group">
             <div className="absolute inset-0 bg-gradient-to-br from-blue-400 to-cyan-400 rounded-3xl blur-xl opacity-50 group-hover:opacity-75 transition-opacity"></div>
             <div className="relative rounded-3xl overflow-hidden shadow-2xl">
@@ -153,9 +206,7 @@ export default function About() {
         </div>
       </section>
 
-      {/* ================= MISSION & VISION ================= */}
       <section className="relative py-20 px-6 bg-gradient-to-br from-[#1e3a5f] via-[#0f2942] to-[#1e3a5f] overflow-hidden">
-        {/* Background Pattern */}
         <div className="absolute inset-0 opacity-10">
           <div
             className="absolute inset-0"
@@ -166,7 +217,6 @@ export default function About() {
         </div>
 
         <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-10 relative">
-          {/* Mission */}
           <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-3xl p-8 hover:bg-white/15 transition-all">
             <div className="bg-gradient-to-br from-slate-900 to-slate-600 w-16 h-16 rounded-2xl flex items-center justify-center mb-6 shadow-lg">
               <FaLightbulb className="text-white text-3xl" />
@@ -179,7 +229,6 @@ export default function About() {
             </p>
           </div>
 
-          {/* Vision */}
           <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-3xl p-8 hover:bg-white/15 transition-all">
             <div className="bg-gradient-to-br from-slate-900 to-slate-600 w-16 h-16 rounded-2xl flex items-center justify-center mb-6 shadow-lg">
               <FaHeart className="text-white text-3xl" />
@@ -194,9 +243,7 @@ export default function About() {
         </div>
       </section>
 
-      {/* ================= CORE VALUES ================= */}
       <section className="relative py-24 px-6 bg-gradient-to-b from-white via-blue-50/50 to-white">
-        {/* Decorative Wave */}
         <svg
           className="absolute top-0 left-0 w-full h-20 text-blue-100 -mt-1"
           preserveAspectRatio="none"
@@ -229,7 +276,6 @@ export default function About() {
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
-            {/* VALUE 1 - Trust */}
             <div className="group bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border-2 border-transparent hover:border-blue-400">
               <div className="relative h-56 overflow-hidden">
                 <img
@@ -256,7 +302,6 @@ export default function About() {
               </div>
             </div>
 
-            {/* VALUE 2 - Customer First */}
             <div className="group bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border-2 border-transparent hover:border-blue-400">
               <div className="relative h-56 overflow-hidden">
                 <img
@@ -283,7 +328,6 @@ export default function About() {
               </div>
             </div>
 
-            {/* VALUE 3 - Innovation */}
             <div className="group bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border-2 border-transparent hover:border-blue-400">
               <div className="relative h-56 overflow-hidden">
                 <img
@@ -312,9 +356,7 @@ export default function About() {
         </div>
       </section>
 
-      {/* ================= STATS SECTION ================= */}
       <section className="relative bg-gradient-to-br from-[#1e3a5f] via-[#0f2942] to-[#1e3a5f] py-20 px-6 overflow-hidden">
-        {/* Background Pattern */}
         <div className="absolute inset-0 opacity-10">
           <div
             className="absolute inset-0"
@@ -335,29 +377,29 @@ export default function About() {
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 text-center hover:bg-white/15 transition-all">
-              <p className="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400 mb-2">
-                500+
+            <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 text-center hover:bg-white/15 transition-all group">
+              <p className="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400 mb-2 inline-block group-hover:scale-125 transition-transform duration-300">
+                <Counter end={500} suffix="+" />
               </p>
               <p className="text-white font-semibold">Active Listings</p>
             </div>
 
-            <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 text-center hover:bg-white/15 transition-all">
-              <p className="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-400 mb-2">
-                10K+
+            <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 text-center hover:bg-white/15 transition-all group">
+              <p className="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-400 mb-2 inline-block group-hover:scale-125 transition-transform duration-300">
+                <Counter end={10} suffix="K+" />
               </p>
               <p className="text-white font-semibold">Happy Customers</p>
             </div>
 
-            <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 text-center hover:bg-white/15 transition-all">
-              <p className="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400 mb-2">
-                98%
+            <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 text-center hover:bg-white/15 transition-all group">
+              <p className="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400 mb-2 inline-block group-hover:scale-125 transition-transform duration-300">
+                <Counter end={98} suffix="%" />
               </p>
               <p className="text-white font-semibold">Satisfaction Rate</p>
             </div>
 
-            <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 text-center hover:bg-white/15 transition-all">
-              <p className="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-amber-400 mb-2">
+            <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 text-center hover:bg-white/15 transition-all group">
+              <p className="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-amber-400 mb-2 inline-block group-hover:scale-125 transition-transform duration-300">
                 24/7
               </p>
               <p className="text-white font-semibold">Support Available</p>

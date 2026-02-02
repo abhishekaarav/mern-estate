@@ -57,8 +57,30 @@ export default function Profile() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (file) handleFileUpload(file);
+    if (file) {
+      setFileUploadError(false);
+      setFilePerc(0);
+      handleFileUpload(file);
+    }
   }, [file]);
+
+  useEffect(() => {
+    if (fileUploadError) {
+      const timer = setTimeout(() => {
+        setFileUploadError(false);
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [fileUploadError]);
+
+  useEffect(() => {
+    if (filePerc === 100) {
+      const timer = setTimeout(() => {
+        setFilePerc(0);
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [filePerc]);
 
   useEffect(() => {
     if (updateSuccess) {
@@ -69,9 +91,32 @@ export default function Profile() {
     }
   }, [updateSuccess]);
 
+  useEffect(() => {
+    if (error) {
+      const timer = setTimeout(() => {
+        dispatch(updateUserFailure(null));
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [error, dispatch]);
+
   const handleFileUpload = (file) => {
+    // File size validation (5MB limit)
+    if (file.size > 5 * 1024 * 1024) {
+      setFileUploadError("Image size must be less than 5MB");
+      return;
+    }
+
+    // File type validation
+    if (!file.type.startsWith("image/")) {
+      setFileUploadError("Please upload only image files");
+      return;
+    }
+
     const storage = getStorage(app);
-    const fileName = new Date().getTime() + file.name;
+    // Clean file name - remove special characters and spaces
+    const cleanFileName = file.name.replace(/[^a-zA-Z0-9.-]/g, "_");
+    const fileName = new Date().getTime() + "_" + cleanFileName;
     const storageRef = ref(storage, fileName);
     const uploadTask = uploadBytesResumable(storageRef, file);
 
@@ -82,7 +127,9 @@ export default function Profile() {
           Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100),
         );
       },
-      () => setFileUploadError(true),
+      (error) => {
+        setFileUploadError(error.message || "Image upload failed");
+      },
       () => {
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) =>
           setFormData({ ...formData, avatar: downloadURL }),
@@ -101,6 +148,7 @@ export default function Profile() {
       const res = await fetch(`/api/user/update/${currentUser._id}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        credentials: "include", // ✅ Cookie send karne ke liye
         body: JSON.stringify(formData),
       });
       const data = await res.json();
@@ -122,6 +170,7 @@ export default function Profile() {
       dispatch(deleteUserStart());
       const res = await fetch(`/api/user/delete/${currentUser._id}`, {
         method: "DELETE",
+        credentials: "include", // ✅ Cookie send karne ke liye
       });
       const data = await res.json();
 
@@ -140,7 +189,9 @@ export default function Profile() {
   const handleSignOut = async () => {
     try {
       dispatch(signOutUserStart());
-      const res = await fetch("/api/auth/signout");
+      const res = await fetch("/api/auth/signout", {
+        credentials: "include", // ✅ Cookie send karne ke liye
+      });
       const data = await res.json();
 
       if (data.success === false) {
@@ -160,7 +211,9 @@ export default function Profile() {
       setActiveListings(true);
       setShowListingsError(false);
 
-      const res = await fetch(`/api/user/listings/${currentUser._id}`);
+      const res = await fetch(`/api/user/listings/${currentUser._id}`, {
+        credentials: "include", // ✅ Cookie send karne ke liye
+      });
       const data = await res.json();
 
       if (data.success === false) {
@@ -182,6 +235,7 @@ export default function Profile() {
     try {
       const res = await fetch(`/api/listing/delete/${listingId}`, {
         method: "DELETE",
+        credentials: "include", // ✅ Cookie send karne ke liye
       });
       const data = await res.json();
 
@@ -240,7 +294,9 @@ export default function Profile() {
 
             <p className="text-center font-medium text-sm">
               {fileUploadError && (
-                <span className="text-red-600">Upload failed</span>
+                <span className="text-red-600">
+                  Upload failed: {fileUploadError}
+                </span>
               )}
               {filePerc > 0 && filePerc < 100 && `Uploading ${filePerc}%`}
               {filePerc === 100 && (
@@ -352,7 +408,7 @@ export default function Profile() {
               className="bg-emerald-600 text-white py-3 rounded-xl text-base text-center font-semibold hover:opacity-90 hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-2"
             >
               <FaPlus />
-              Create Listing
+              Add New Property
             </Link>
           </form>
 
@@ -380,7 +436,7 @@ export default function Profile() {
             }`}
           >
             <FaListUl />
-            Show Listings
+            Show My Properties
           </button>
         </div>
       </div>
@@ -393,7 +449,7 @@ export default function Profile() {
           <div className="flex items-center justify-center mb-8">
             <h2 className="text-3xl font-bold text-slate-800 flex items-center gap-3">
               <FaHome className="text-slate-700" />
-              Your Listings
+              My Properties
               <span className="text-lg font-normal text-slate-500">
                 ({userListings.length})
               </span>

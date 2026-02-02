@@ -75,7 +75,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-slate-100">
+    <div className="min-h-screen bg-gradient-to-br from-slate-100 via-blue-80 to-slate-150">
       <div className="relative bg-gradient-to-br from-[#1e3a5f] via-[#0f2942] to-[#1e3a5f] overflow-hidden pb-32">
         <div className="absolute inset-0 opacity-[0.15]">
           <div
@@ -191,7 +191,6 @@ export default function Home() {
         </div>
       </div>
 
-     
       {offerListings.length > 0 && (
         <div className="relative w-full -mt-16">
           <div className="w-full shadow-2xl">
@@ -220,10 +219,9 @@ export default function Home() {
                         alt={listing.name}
                         className="w-full h-full object-cover"
                       />
-                    
+
                       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
 
-                      
                       <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                         <div className="absolute bottom-0 left-0 right-0 p-8 sm:p-12 lg:p-16">
                           <div className="max-w-7xl mx-auto">
@@ -241,7 +239,6 @@ export default function Home() {
                         </div>
                       </div>
 
-                      
                       <div className="absolute top-6 right-6 sm:top-8 sm:right-8">
                         {listing.offer &&
                           listing.regularPrice &&
@@ -267,10 +264,8 @@ export default function Home() {
         </div>
       )}
 
-      
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-24">
         <div className="space-y-20">
-          
           {offerListings.length > 0 && (
             <section>
               <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between mb-10 gap-4">

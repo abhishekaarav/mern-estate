@@ -256,7 +256,7 @@ export default function Search() {
         <div className="bg-gradient-to-r from-slate-800 to-slate-700 p-6 shadow-md">
           <h1 className="text-3xl font-bold text-white flex items-center justify-center gap-3">
             <FaHome className="text-2xl" />
-            Listing Results
+            Property Results
             {!loading && listings.length > 0 && (
               <span className="text-lg font-normal text-slate-300">
                 ({listings.length} found)
