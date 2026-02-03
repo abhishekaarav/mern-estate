@@ -74,6 +74,9 @@ export default function Home() {
     fetchOfferListings();
   }, []);
 
+  
+
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-100 via-blue-80 to-slate-150">
       <div className="relative bg-gradient-to-br from-[#1e3a5f] via-[#0f2942] to-[#1e3a5f] overflow-hidden pb-32">
@@ -203,7 +206,7 @@ export default function Home() {
                   "swiper-pagination-bullet-active !bg-emerald-500",
               }}
               autoplay={{
-                delay: 4000,
+                delay: 3000,
                 disableOnInteraction: false,
               }}
               effect="fade"
@@ -246,9 +249,7 @@ export default function Home() {
                             <span className="bg-gradient-to-r from-emerald-500 to-teal-500 text-white px-5 py-2.5 rounded-xl text-sm font-bold uppercase tracking-wide shadow-2xl flex items-center gap-2">
                               <FaTag />
                               {Math.round(
-                                ((listing.regularPrice -
-                                  listing.discountPrice) /
-                                  listing.regularPrice) *
+                                (listing.discountPrice / listing.regularPrice) *
                                   100,
                               )}
                               % OFF
