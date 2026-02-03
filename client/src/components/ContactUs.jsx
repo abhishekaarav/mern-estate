@@ -34,7 +34,6 @@ export default function ContactUs() {
     setLoading(true);
 
     try {
-     
       const adminFormData = new FormData();
       adminFormData.append(
         "access_key",
@@ -155,7 +154,7 @@ PrimeSpace - Your Trusted Property Partner
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
-                    placeholder="John Doe"
+                    placeholder="Virat Kohli"
                     required
                     disabled={loading}
                     className="w-full px-4 py-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all disabled:opacity-50"
@@ -175,7 +174,7 @@ PrimeSpace - Your Trusted Property Partner
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
-                    placeholder="john@example.com"
+                    placeholder="viratkoh@example.com"
                     required
                     disabled={loading}
                     className="w-full px-4 py-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all disabled:opacity-50"
